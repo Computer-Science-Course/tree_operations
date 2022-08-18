@@ -161,12 +161,43 @@ void inOrder(struct node **v){
     }
 }
 
+void posOrder(struct node **v){
+    /*Função para precorrer e imprimir a árvore "pos-order".
+
+    struct node **v:    inicialmente, o endereço do nó raiz, posteriormente,
+                        o endereço de todos os nós restantes da árvore,
+                        um a um.
+    */
+    if(*v != NULL){
+        posOrder(&((*v)->left));
+        posOrder(&((*v)->right));
+        printf("%d ", (*v)->data);
+    }
+}
+
 void main(){
     struct node *root;
     root = NULL;
 
-    insert(&root, 45);
-    insert(&root, 34);
-    insert(&root, 76);
+    insert(&root, 20);
+    insert(&root, 10);
+    insert(&root, 5);
+    insert(&root, 15);
+    insert(&root, 30);
+    insert(&root, 25);
+    insert(&root, 35);
+    insert(&root, 2);
+    insert(&root, 12);
+    insert(&root, 15);
+    insert(&root, 33);
     printf("Adicionado com sucesso\n");
+    printf("\nPrinting pre order: ");
+    preOrder(&root);
+    printf("\nPrinting in order: ");
+    inOrder(&root);
+    printf("\nPrinting pos order: ");
+    posOrder(&root);
+
+    printf("Biggest at left: %d.\n", **biggestLeft(root));
+    printf("Smallest at right: %d.\n", **smallestRight(root));
 }
