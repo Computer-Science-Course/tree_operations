@@ -43,6 +43,20 @@ struct node **biggestLeft(struct node *v)
     return aux;
 };
 
+struct node **smallestRight(struct node *v)
+{
+    struct node **aux = &(v);
+    if ((*aux)->right != NULL)
+    {
+        aux = &(*aux)->right;
+        while ((*aux)->left != NULL)
+        {
+            aux = &(*aux)->left;
+        }
+    }
+    return aux;
+}
+
 
 void main(){
     struct node *root;
