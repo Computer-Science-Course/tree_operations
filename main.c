@@ -57,6 +57,51 @@ struct node **smallestRight(struct node *v)
     return aux;
 }
 
+void removeNode(struct node **v, int num)
+{
+    struct node **aux2, *aux3;
+    if (*v != NULL)
+    {
+        if ((*v)->data == num)
+        {
+            if ((*v)->left == (*v)->right)
+            {
+                free(*v);
+                *v = NULL;
+            }
+            else
+            {
+                if ((*v)->left != NULL)
+                {
+                    aux2 = biggestLeft(*v);
+                    aux3 = *aux2;
+                    (*aux2) = (*aux2)->left;
+                }
+                else
+                {
+                    aux2 = smallestRight(*v);
+                    aux3 = *aux2;
+                    (*aux2) = (*aux2)->right;
+                }
+                (*v)->data = aux3->data;
+                free(aux3);
+                aux3 = NULL;
+            }
+        }
+        else
+        {
+            if (num < (*v)->data)
+            {
+                removeNode(&(*v)->left, num);
+            }
+            else
+            {
+                removeNode(&(*v)->right, num);
+            }
+        }
+    }
+}
+
 
 void main(){
     struct node *root;
