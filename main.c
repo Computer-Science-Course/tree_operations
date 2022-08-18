@@ -102,6 +102,13 @@ void removeNode(struct node **v, int num)
     }
 }
 
+void inOrder(struct node **v){
+    if(*v != NULL){
+        inOrder(&((*v)->left));
+        printf("%d ", (*v)->data);
+        inOrder(&((*v)->right));
+    }
+}
 
 void main(){
     struct node *root;
