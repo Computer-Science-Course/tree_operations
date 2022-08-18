@@ -2,6 +2,8 @@
 
 typedef struct node
 {
+    /*Struct que implementa um nó de uma árvore
+    */
     int data;
     struct node *left;
     struct node *right;
@@ -9,6 +11,14 @@ typedef struct node
 
 void insert(struct node **v, int data)
 {
+    /*Função para a inserção de um nó em uma árvore.
+
+    struct node **v:    inicialmente, o endereço do nó raiz, posteriormente,
+                        o endereço dos nós subsequentes até encontrar um nó
+                        capaz de apontar para o dado em questão (um nó que
+                        aponte para NULL).
+    int data:           dado a ser armazenado no nó que será iserido na árvore.
+    */
     if (*v == NULL)
     {
         *v = (struct node *) malloc(sizeof(struct node));
@@ -31,6 +41,13 @@ void insert(struct node **v, int data)
 
 struct node **biggestLeft(struct node *v)
 {
+    /*Função para encontrar o maior valor na sub-árvore à esquerda do nó
+    em questão.
+
+    struct node *v:     Nó pai da sub-árvore onde ocorre a busca (Nó a ser 
+                        substituido).
+    */
+   printf("\nI got: %d.\n", (*v));
     struct node **aux = &(v);
     if ((*aux)->left != NULL)
     {
@@ -45,6 +62,12 @@ struct node **biggestLeft(struct node *v)
 
 struct node **smallestRight(struct node *v)
 {
+    /*Função para encontrar o menor valor na sub-árvore à direita do nó
+    em questão.
+
+    struct node *v:     Nó pai da sub-árvore onde ocorre a busca (Nó a ser 
+                        substituido).
+    */
     struct node **aux = &(v);
     if ((*aux)->right != NULL)
     {
@@ -59,6 +82,14 @@ struct node **smallestRight(struct node *v)
 
 void removeNode(struct node **v, int num)
 {
+    /*Função para a remoção de um nó em uma árvore.
+
+    struct node **v:    inicialmente, o endereço do nó raiz, posteriormente,
+                        o endereço dos nós subsequentes até encontrar um que
+                        aponte para um nó, cujo o dado seja o valor a ser
+                        removido ((*v)->data == num)).
+    int data:           dado do nó a ser removido.
+    */
     struct node **aux2, *aux3;
     if (*v != NULL)
     {
@@ -102,7 +133,27 @@ void removeNode(struct node **v, int num)
     }
 }
 
+void preOrder(struct node **v){
+    /*Função para precorrer e imprimir a árvore "pre-order".
+
+    struct node **v:    inicialmente, o endereço do nó raiz, posteriormente,
+                        o endereço de todos os nós restantes da árvore,
+                        um a um.
+    */
+    if(*v != NULL){
+        printf("%d ", (*v)->data);
+        preOrder(&((*v)->left));
+        preOrder(&((*v)->right));
+    }
+}
+
 void inOrder(struct node **v){
+    /*Função para precorrer e imprimir a árvore "in-order".
+
+    struct node **v:    inicialmente, o endereço do nó raiz, posteriormente,
+                        o endereço de todos os nós restantes da árvore,
+                        um a um.
+    */
     if(*v != NULL){
         inOrder(&((*v)->left));
         printf("%d ", (*v)->data);
