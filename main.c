@@ -29,7 +29,19 @@ void insert(struct node **v, int data)
     }
 };
 
-
+struct node **biggestLeft(struct node *v)
+{
+    struct node **aux = &(v);
+    if ((*aux)->left != NULL)
+    {
+        aux = &(*aux)->left;
+        while ((*aux)->right != NULL)
+        {
+            aux = &(*aux)->right;
+        }
+    }
+    return aux;
+};
 
 
 void main(){
