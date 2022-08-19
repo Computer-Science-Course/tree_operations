@@ -1,5 +1,7 @@
 #include <stdio.h>
 
+static int counter = 0;
+
 typedef struct node
 {
     /*Struct que implementa um nó de uma árvore
@@ -47,7 +49,6 @@ struct node **biggestLeft(struct node *v)
     struct node *v:     Nó pai da sub-árvore onde ocorre a busca (Nó a ser 
                         substituido).
     */
-   printf("\nI got: %d.\n", (*v));
     struct node **aux = &(v);
     if ((*aux)->left != NULL)
     {
@@ -65,7 +66,7 @@ struct node **smallestRight(struct node *v)
     /*Função para encontrar o menor valor na sub-árvore à direita do nó
     em questão.
 
-    struct node *v:     Nó pai da sub-árvore onde ocorre a busca (Nó a ser 
+    struct node **v:     Nó pai da sub-árvore onde ocorre a busca (Nó a ser 
                         substituido).
     */
     struct node **aux = &(v);
@@ -307,6 +308,18 @@ void main(){
     printf("\nPrinting pos order: ");
     posOrder(&root);
 
-    printf("Biggest at left: %d.\n", **biggestLeft(root));
-    printf("Smallest at right: %d.\n", **smallestRight(root));
+    int searched_number = 33;
+    searchNode(&root, searched_number, 1);
+
+    printf("\nCounting nodes: %d.", countNodes(&root));
+    printf("\n\n");
+
+    printf("\nCounting leaves: %d.", countLeaves(&root));
+    printf("\n\n");
+
+    printf("\nThe biggest element is: %d.", getBiggestNodeData(&root));
+    printf("\n\n");
+
+    printf("\nThe tree height is: %d.", treeHeight(&root));
+    printf("\n\n");
 }

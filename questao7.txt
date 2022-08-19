@@ -1,0 +1,12 @@
+Qual a diferença de uma árvore binária para uma AVL? Explique as vantagens e desvantagens de usar árvores binárias balanceadas.
+
+ - As árvores binárias não possuem fator de balanceamento, enquanto as AVLs possuem, e seu valor deve ser 0 ou +-1.
+ - Cada nó da árvore binária possui três campos, referência para a direita, valor do nó e referência para a direita, enquanto que as AVLs possuem quatro, referência para a direita, valor do nó, referência para direita e fator de balanceamento.
+ - As árvores binárias são mais fáceis de serem implementadas, pois basta inserir os nós de acordo com o seu valor, se for menor ou igual que um dado nó, vai para a sua esquerda, se for maior vai para sua direita. Já nas AVLs, começamos com esse lógica, mas se o nó inserido desbalancear a árvore, é necessário realizar algumas mudanças. Por esse motivo, árvores AVLs são sempre balanceadas, enquanto que árvores binárias, podem ser, mas não necessariamente serão.
+
+ Pros de uma AVL:
+  - Operações mais rápidas: já que a árvore está sempre balanceada, as operações são sempre mais otimizadas (principalmente para buscas).
+  - Balanceamento natural: ela são "naturalmente" balanceadas, sendo um processo que não requer maior deslocamento da árvore como toda.
+
+Contras de uma AVL:
+ - Exclusão e insersão "lentas": já que a árvore precisa sempre está balanceada, essas operações podem desbalancea-la, o que resulta em uma reordenação da mesma.
