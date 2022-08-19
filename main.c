@@ -133,6 +133,33 @@ void removeNode(struct node **v, int num)
     }
 }
 
+void searchNode(struct node **v, int num, int step){
+    /*Função para precorrer e buscar um nó com o dado especificado.
+
+    struct node **v:    inicialmente, o endereço do nó raiz, posteriormente,
+                        o endereço de todos os nós restantes da árvore,
+                        até chegar no nó do dado em questão.
+    */
+    if(step == 1){
+        printf("\nCaminho ate o numero buscado (%d):", num);
+    }
+
+    if((*v) != NULL){
+        printf(" %d", (*v)->data);
+        if((*v)->data != num){
+            if(num < (*v)->data){
+                searchNode(&(*v)->left, num, ++step);
+            }else {
+                searchNode(&(*v)->right, num, ++step);
+            }
+        }else {
+            printf("\nEu encontrei um valor : %d.\n", (*v)->data);
+        }
+    }else {
+        printf("\nNa moral, eu percorri a arvore, mas nao encontrei o %d.\n", num);
+    }
+}
+
 void preOrder(struct node **v){
     /*Função para precorrer e imprimir a árvore "pre-order".
 
