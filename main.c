@@ -202,21 +202,103 @@ void posOrder(struct node **v){
     }
 }
 
+int nodeWalker(struct node **v){
+    /*Função para precorrer e contar todos os nós de um árvore, dado o endereço
+    de sua raiz.
+
+    struct node **v:    inicialmente, o endereço do nó raiz, posteriormente,
+                        o endereço de todos os nós restantes da árvore,
+                        um a um.
+    */
+    if(*v != NULL){
+        nodeWalker(&((*v)->left));
+        counter++;
+        nodeWalker(&((*v)->right));
+    }
+    return counter;
+}
+int countNodes(struct node **v){
+    counter = 0;
+    return nodeWalker(&(*v));
+}
+
+int leafWalker(struct node **v){
+
+    /*Função para precorrer e contar todos os nós de um árvore, dado o endereço
+    de sua raiz.
+
+    struct node **v:    inicialmente, o endereço do nó raiz, posteriormente,
+                        o endereço de todos os nós restantes da árvore,
+                        um a um.
+    */
+    if(*v != NULL){
+        leafWalker(&((*v)->left));
+        if((*v)->left == NULL && (*v)->right == NULL){
+            counter++;
+        }
+        leafWalker(&((*v)->right));
+    }
+    return counter;
+}
+int countLeaves(struct node **v){
+    counter = 0;
+    return leafWalker(&(*v));
+}
+
+int getBiggestNodeData(struct node **v){
+    /*Função para encontrar o maior valor na árvore.
+
+    struct node **v:     Raiz da árvore onde ocorre a busca.
+    */
+    struct node **aux = v;
+    if ((*aux)->right != NULL)
+    {
+        aux = &(*aux)->right;
+        while ((*aux)->right != NULL)
+        {
+            aux = &(*aux)->right;
+        }
+    }
+    return (*aux)->data;
+}
+
+int max(int a, int b){
+    /* Função que retorna o maior entre dois valores inteiros, ou o segundo
+    caso sejam iguais. Vamos utilizar essa função para definir o maior caminho
+    de uma árvore.
+
+    int a, b:       Valores a serem comparados.
+    */
+    if(a > b){
+        return a;
+    }else {
+        return b;
+    }
+}
+int treeHeight(struct node **v) {
+    /*Função para encontrar o maior valor na árvore.
+
+    struct node **v:     Raiz da árvore onde ocorre a busca.
+    */
+    if ((*v) == NULL){
+        return 0;
+    }else {
+        return max(treeHeight(&(*v)->left), treeHeight(&(*v)->right)) + 1;
+    }
+}
+
 void main(){
     struct node *root;
     root = NULL;
+    // int nodes[] = {20, 10, 5, 15, 30, 25,35, 2, 12, 15, 33, 50, 55, 60};
+    int nodes[] = {20, 10, 5, 15, 30, 25, 35, 2, 12, 15, 33};
+    // int nodes[] = {20, 10, 15, 30};
+    int nodes_length = sizeof(nodes)/sizeof(nodes[0]);
 
-    insert(&root, 20);
-    insert(&root, 10);
-    insert(&root, 5);
-    insert(&root, 15);
-    insert(&root, 30);
-    insert(&root, 25);
-    insert(&root, 35);
-    insert(&root, 2);
-    insert(&root, 12);
-    insert(&root, 15);
-    insert(&root, 33);
+    for(int i = 0; i < nodes_length; i++){
+        insert(&root, nodes[i]);
+    }
+
     printf("Adicionado com sucesso\n");
     printf("\nPrinting pre order: ");
     preOrder(&root);
